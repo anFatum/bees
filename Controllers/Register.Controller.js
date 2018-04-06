@@ -1,7 +1,7 @@
 const registerService = require("../Services/Register.Service");
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
-const Config = require("../Configs/Server.Config")
+const Config = require("../Configs/Server.Config");
 const nodemailer = require("nodemailer");
 
 const hashPassword = function (password) {
@@ -70,7 +70,7 @@ module.exports.confirmEmail = async (req, res, next) => {
 
     const decoded = jwt.decode(req.query.token, Config.jwtSecret);
 
-    const a = registerService.confirmUser(decoded.email);
+    const a = await registerService.confirmUser(decoded.email);
 
     console.log(a);
 

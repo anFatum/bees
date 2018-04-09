@@ -6,23 +6,37 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    surname: {
-        type: String
-    },
+    surname: String,
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     login: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     phone: {
         type: String,
         trim: true
     },
-    age: {
-        type: Number
+    age: Number,
+    passHash: {
+        type: String,
+        required: true
+    },
+    passSalt: {
+        type: String,
+        required: true
+    },
+    isConfirmed: {
+        type: Boolean,
+        default: false
+    },
+    isActive: {
+        type: Boolean,
+        default: true
     }
 });
 

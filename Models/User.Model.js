@@ -30,8 +30,14 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    isConfirmed: Boolean,
-    isActive: Boolean
+    isConfirmed: {
+        type: Boolean,
+        default: false
+    },
+    isActive: {
+        type: Boolean,
+        default: true
+    }
 });
 
 module.exports = mongoose.model("User", userSchema);

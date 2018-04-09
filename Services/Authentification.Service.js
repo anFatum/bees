@@ -1,4 +1,6 @@
-const UserModel = require("../Models/User.Model")
+const UserModel = require("../Models/User.Model");
+
+// module.exports.confirmAuth =
 
 module.exports.findEmailUser = async userEmail => await UserModel.findOne({email:userEmail});
 

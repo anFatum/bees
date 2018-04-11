@@ -1,4 +1,5 @@
 module.exports = {
     dbUrl: "mongodb://admin:admin@ds135537.mlab.com:35537/bees",
-    jwtSecret: "secret"
+    jwtSecret: "secret",
+	port: process.env.PORT || 3000
 };

@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 Routes(app);
-app.listen(3000);
+app.listen(process.env.PORT);
 
 module.exports = app;   // instance  HashMap
 

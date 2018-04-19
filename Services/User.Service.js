@@ -1,4 +1,5 @@
-const UserModel = require("../Models/User.Model")
+const UserModel = require("../Models/User.Model");
+const crypto = require("crypto");
 
 
 module.exports.hashPassword = function (password) {

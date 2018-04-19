@@ -38,6 +38,18 @@ const userSchema = new Schema({
         type: Boolean,
         default: true
     }
+}, {
+    // toObject: {
+    //     transform: function (doc, ret) {
+    //         delete ret._id;
+    //     }
+    // },
+    toJSON: {
+        transform: function (doc, ret) {
+            delete ret.passHash;
+            delete ret.passSalt;
+        }
+    }
 });
 
 module.exports = mongoose.model("User", userSchema);

@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require('body-parser');
-const mongoose = require("./Libs/mongoose.lib");
+const sequelize = require("./Libs/sequelize.lib");
 const config = require("./Configs/Server.Config");
 const cors = require('cors');
 const _ = require('lodash');
@@ -9,6 +9,8 @@ const logger = require('./logger');
 
 const app = express();
 const Routes = require("./Routes");
+
+sequelize.connect();
 
 logger.info(`Process: ${process.cwd()}`);
 
@@ -46,6 +48,4 @@ app.use(errorHandler);
 
 app.listen(config.port, () => console.log("Server is running on port: " + config.port));
 
-module.exports = app;   // instance  HashMap
-
-//module.exports.super = abc - function
+module.exports = app;

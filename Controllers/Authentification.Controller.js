@@ -25,19 +25,15 @@ module.exports.forgotPassword = async (req, res, next) => {
         const token = jwt.sign({email: user.email}, Config.jwtSecret);
         mailer.sendForgot(req.header('host'), user.email, token);
         res.json({
-           message:"Forgot sent"
+            message: "Forgot sent"
         });
     } else throw new HttpError(404, 'User not found');
 };
 
-module.exports.changePassword = async (req,res,next) => {
-    const decoded = jwt.decode(req.query.token, Config.jwtSecret);
-    const user = await authService.findEmailUser(decoded.email);
-    if (user){
-        if(authService.changePassword(user.id, req.body.password))
-            res.json({
-                message:"Changed password"
-            });
-        else HttpError(426, 'Password is not valid');
-    } else throw new HttpError(404, 'User not found');
+module.exports.changePassword = async (req, res, next) => {
+    if (authService.changePassword(req.user.id, req.body.password))
+        res.json({
+            message: "Changed password"
+        });
+    else HttpError(426, 'Password is not valid');
 };

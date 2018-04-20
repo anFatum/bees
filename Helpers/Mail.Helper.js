@@ -9,7 +9,7 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-module.exports.sendConfirmation = function (host, mail, token) {
+module.exports.sendConfirmation = function (host, email, token) {
     const url = "http://" + host + "/register/confirm-email?token=" + token;
     const mailOptions = {
         from: '"bees-confirmation" <no-reply@bees.com>',

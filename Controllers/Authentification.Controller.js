@@ -3,6 +3,7 @@ const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 const Config = require("../Configs/Server.Config");
 const HttpError = require("../error");
+const mailer = require("../Helpers/Mail.Helper");
 
 module.exports.confirmAuth = async (req, res, next) => {
     const user = req.body.email ? await authService.findEmailUser(req.body.email) : await authService.findLoginUser(req.body.login);
@@ -14,5 +15,29 @@ module.exports.confirmAuth = async (req, res, next) => {
                 jwt: jwt.sign({user: user}, Config.jwtSecret)
             });
         } else throw new HttpError(426, 'Password is not valid');
+    } else throw new HttpError(404, 'User not found');
+};
+
+
+module.exports.forgotPassword = async (req, res, next) => {
+    const user = req.body.email ? await authService.findEmailUser(req.body.email) : await authService.findLoginUser(req.body.login);
+    if (user) {
+        const token = jwt.sign({email: user.email}, Config.jwtSecret);
+        mailer.sendForgot(req.header('host'), user.email, token);
+        res.json({
+           message:"Forgot sent"
+        });
+    } else throw new HttpError(404, 'User not found');
+};
+
+module.exports.changePassword = async (req,res,next) => {
+    const decoded = jwt.decode(req.query.token, Config.jwtSecret);
+    const user = await authService.findEmailUser(decoded.email);
+    if (user){
+        if(authService.changePassword(user.id, req.body.password))
+            res.json({
+                message:"Changed password"
+            });
+        else HttpError(426, 'Password is not valid');
     } else throw new HttpError(404, 'User not found');
 };

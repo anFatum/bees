@@ -2,6 +2,7 @@ const registerService = require("../Services/Register.Service");
 const jwt = require("jsonwebtoken");
 const Config = require("../Configs/Server.Config");
 const userService = require("../Services/User.Service");
+const mailer = require("../Helpers/Mail.Helper");
 
 
 module.exports.createUser = async (req, res, next) => {
@@ -19,10 +20,10 @@ module.exports.createUser = async (req, res, next) => {
 
     const user = await registerService.createUser(new_user);
 
-    if (user) await registerService.sendConfirmation(new_user.email, token);
+    if (user) await mailer.sendConfirmation(req.header('host'),new_user.email, token);
 
     res.json({
-        message: "OK"
+        message: "Created"
     })
 };
 
@@ -33,6 +34,6 @@ module.exports.confirmEmail = async (req, res, next) => {
     await registerService.confirmUser(decoded.email);
 
     res.json({
-        message: "OK"
+        message: "Confirmed"
     })
 };

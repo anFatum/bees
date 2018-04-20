@@ -13,5 +13,5 @@ module.exports.hashPassword = function (password) {
 
 module.exports.getUsers = async () => await UserModel.findAll();
 
-module.exports.deleteUsers = async () => await UserModel.destroy({where:{}});
+module.exports.deleteUsers = async () => await UserModel.destroy({where: {}});
 

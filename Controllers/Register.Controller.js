@@ -17,9 +17,9 @@ module.exports.createUser = async (req, res, next) => {
 
     const token = jwt.sign({email: new_user.email}, Config.jwtSecret);
 
-    await registerService.sendConfirmation(new_user.email, token);
-
     const user = await registerService.createUser(new_user);
+
+    if (user) await registerService.sendConfirmation(new_user.email, token);
 
     res.json({
         message: "OK"

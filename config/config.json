@@ -1,0 +1,40 @@
+{
+  "development": {
+    "database": "rmrwambj",
+    "username": "rmrwambj",
+    "password": "TeRvzaAsYwKFAQcDSszThV6PLpwFZ3Ni",
+    "host": "elmer.db.elephantsql.com",
+    "port": "5432",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "timeout": 2000
+    },
+    "define": {
+      "underscored": true,
+      "freezeTableName": true,
+      "timestamps": false
+    },
+    "pool": {
+      "max": 5,
+      "min": 0,
+      "idle": 10000
+    },
+    "benchmark": true,
+    "logging": false,
+    "operatorAliases": false
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}

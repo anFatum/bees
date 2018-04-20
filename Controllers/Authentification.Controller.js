@@ -6,10 +6,8 @@ const HttpError = require("../error");
 
 module.exports.confirmAuth = async (req, res, next) => {
     const user = req.body.email ? await authService.findEmailUser(req.body.email) : await authService.findLoginUser(req.body.login);
-
     if (user) {
-        const key = crypto.pbkdf2Sync(req.body.password, user.passSalt, 100000, 512, 'sha512').toString("hex");
-
+        const key = crypto.pbkdf2Sync(req.body.password, user.passSalt, 100000, 64, 'sha512').toString("hex");
         if (user.passHash === key) {
             res.json({
                 user: user,

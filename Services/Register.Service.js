@@ -1,5 +1,6 @@
-const UserModel = require("../Models/User.Model");
+const db = require("../Libs/sequelize.lib").db;
 const nodemailer = require("nodemailer");
+const UserModel = db['UserModel'];
 
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -28,4 +29,4 @@ module.exports.sendConfirmation = function (email, token) {
 
 module.exports.createUser = async userData => await UserModel.create(userData);
 
-module.exports.confirmUser = async userEmail => await UserModel.find({email: userEmail}).update({isConfirmed: true});
+module.exports.confirmUser = async userEmail => await UserModel.find({where: {email: userEmail}}).then(user=>user.update({isConfirmed: true}));

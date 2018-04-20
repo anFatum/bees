@@ -1,6 +1,5 @@
-const UserModel = require("../Models/User.Model");
-
-// module.exports.confirmAuth =
+const db = require("../Libs/sequelize.lib").db;
+const UserModel = db['UserModel'];
 
 module.exports.findEmailUser = async userEmail => await UserModel.findOne({email:userEmail});
 

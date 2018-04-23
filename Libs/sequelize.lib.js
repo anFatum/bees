@@ -11,10 +11,10 @@ const createConnection = () => new Sequelize({...databaseConfig, operatorsAliase
 const connection = createConnection();
 
 fs
-    .readdirSync('models')
+    .readdirSync('Models')
     .filter(file => (file.indexOf('.') !== 0)  && (file.slice(-3) === '.js'))
     .forEach(file => {
-        const model = connection['import'](path.resolve(__dirname,'../', 'models', file));
+        const model = connection['import'](path.resolve(__dirname,'../', 'Models', file));
         db[model.name] = model;
     });
 

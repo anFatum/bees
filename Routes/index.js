@@ -4,8 +4,8 @@ const registerRoute = require("./Register.Route");
 const authRoute = require("./Authentification.Route");
 
 module.exports = (app) => {
-    app.use('/', rootRoute);
-    app.use('/user', userRoute);
-    app.use('/register', registerRoute);
-    app.use('/auth', authRoute);
+    app.use('/api/', rootRoute);
+    app.use('/api/user', userRoute);
+    app.use('/api/register', registerRoute);
+    app.use('/api/auth', authRoute);
 };

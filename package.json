@@ -19,7 +19,7 @@
     "express": "^4.16.3",
     "express-promise-router": "^3.0.1",
     "express-validator": "^5.0.3",
-    "jsonwebtoken": "^8.2.0",
+    "jsonwebtoken": "^9.0.0",
     "jwt-decode": "^2.2.0",
     "lodash": "latest",
     "mongoose": "^5.0.9",
